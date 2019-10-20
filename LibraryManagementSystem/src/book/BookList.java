@@ -1,7 +1,9 @@
 package book;
 
+import java.util.Arrays;
+
 public class BookList {
-    Book[] books = new Book[100];
+    private Book[] books = new Book[100];
     private int size = 0;
 
     public BookList() {
@@ -11,4 +13,18 @@ public class BookList {
 
         size = 3;
     }
+
+    public int getSize() {
+        return size;
+    }
+
+    public Book[] getBooks() {
+        return books;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+
 }
