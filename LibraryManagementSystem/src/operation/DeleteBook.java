@@ -18,5 +18,6 @@ public class DeleteBook implements IOperation {
                 return;
             }
         }
+        System.out.println("删除失败！");
     }
 }
