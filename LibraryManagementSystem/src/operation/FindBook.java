@@ -11,11 +11,15 @@ public class FindBook implements IOperation{
         Scanner scanner = new Scanner(System.in);
         String bookName = scanner.next();
         int size = bookList.getSize();
+        int flag = 0;
         for (int i = 0; i < size; i++) {
             if(bookName.equals(bookList.getBooks()[i].getName())) {
                 System.out.println(bookList.getBooks()[i].toString());
+                flag = 1;
             }
         }
-        System.out.println("未找到书籍！");
+        if(flag == 0) {
+            System.out.println("未找到书籍！");
+        }
     }
 }
