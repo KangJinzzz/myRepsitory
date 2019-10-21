@@ -28,5 +28,17 @@ public class Book {
                 ", isBorrowed=" + isBorrowed +
                 '}';
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isBorrowed() {
+        return isBorrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        isBorrowed = borrowed;
+    }
 }
 
