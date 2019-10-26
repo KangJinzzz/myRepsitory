@@ -8,15 +8,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         BookList bookList = new BookList();
+        Scanner scanner = new Scanner(System.in);
 
         User user = login();
         while(true) {
             user.menu();
-            Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             user.doOperation(choice, bookList);
+            scanner.close();
         }
-
     }
     public static User login() {
         while (true) {
