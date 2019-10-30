@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class Card {
@@ -31,6 +33,12 @@ public class Poker {
         }
     }
 
+    //洗牌
+    public void shuffle() {
+        Collections.shuffle(list);
+    }
+
+
     public void display() {
         System.out.print("[");
 
@@ -44,3 +52,5 @@ public class Poker {
         System.out.println(list.size());
     }
 }
+
+
