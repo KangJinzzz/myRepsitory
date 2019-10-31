@@ -38,6 +38,9 @@ public class Poker {
         Collections.shuffle(list);
     }
 
+    public List<Card> getList() {
+        return list;
+    }
 
     public void display() {
         System.out.print("[");
