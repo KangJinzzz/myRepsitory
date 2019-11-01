@@ -10,7 +10,6 @@ class Person {
 
     public void display() {
         System.out.print("[");
-
         for (int i = 0; i < list.size(); i++) {
             System.out.print(list.get(i).myToString());
             if(i != list.size() - 1) {
@@ -22,15 +21,22 @@ class Person {
 }
 
 public class Player {
-    private List<Person> personList = new ArrayList<>(3);
+    private List<Person> personList = new ArrayList<>();
 
 
+    public Player() {
+        for (int i = 0; i < 3; i++) {
+            personList.add(new Person());
+
+        }
+    }
     public void getPoker( Poker poker) {
         List<Card> list = poker.getList();
         int index = 0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < personList.size(); j++) {
-                personList.get(i).getList().add(list.get(index++));
+                personList.get(j).getList().add(list.get(index));
+                index++;
             }
         }
         System.out.println("发牌成功！");
@@ -39,8 +45,12 @@ public class Player {
     public List<Person> getPersonList() {
         return personList;
     }
-    //
-//    public void display() {
-//
-//    }
+
+    public void display() {
+
+        for (int i = 0; i < personList.size(); i++) {
+            System.out.print("player" + i + ": ");
+            personList.get(i).display();
+        }
+    }
 }
