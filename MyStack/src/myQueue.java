@@ -6,7 +6,7 @@ class Node {
         this.val = val;
     }
 }
-public class myQueue {
+public class MyQueue {
     private Node head = null;
     private Node tail = null;
     private int size = 0;
