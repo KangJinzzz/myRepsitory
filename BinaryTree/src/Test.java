@@ -5,6 +5,7 @@ public class Test {
         // tree.inOrderTraversal(tree.root);
         //tree.postOrderTraversal(tree.root);
         //System.out.println(tree.find(tree.root, 'B'));
-        tree.levelOrderTraversal(tree.root);
+        //tree.levelOrderTraversal(tree.root);
+        System.out.println(tree.isCompleteTree(tree.root));
     }
 }

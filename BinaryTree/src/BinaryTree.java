@@ -23,12 +23,19 @@ public class BinaryTree {
         TreeNode E = new TreeNode('E');
         TreeNode F = new TreeNode('F');
         TreeNode G = new TreeNode('G');
+        TreeNode J = new TreeNode('J');
+//        TreeNode X = new TreeNode('X');
+//        TreeNode Z = new TreeNode('Z');
+
         root.left = B;
         root.right = C;
         B.left = D;
         B.right = E;
         E.left = G;
         C.right = F;
+//        C.left = J;
+//        D.left = X;
+//        D.right = Z;
     }
 
     //前序遍历
@@ -134,6 +141,43 @@ public class BinaryTree {
             }
         }
 
+    }
+
+    // 判断一棵树是不是完全二叉树
+    public boolean isCompleteTree(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        //flag为false，表示处于第一阶段，即当前节点都有左右孩子节点
+        boolean flag = false;
+        //把根节点插入队列
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            if (!flag) {
+                if (cur.left == null && cur.right != null) {
+                    return false;
+                }
+                if (cur.left != null && cur.right == null) {
+                    queue.offer(cur.left);
+                    flag = true;
+                }
+                if (cur.left == null && cur.right == null) {
+                    flag = true;
+                }
+                if (cur.left != null && cur.right != null) {
+                    queue.offer(cur.left);
+                    queue.offer(cur.right);
+                }
+            } else {
+                if (cur.left != null || cur.right != null) {
+                    return false;
+                }
+
+            }
+        }
+        return  true;
     }
 
 
