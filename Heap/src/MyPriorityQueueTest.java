@@ -1,14 +1,16 @@
+import java.util.PriorityQueue;
+
 public class MyPriorityQueueTest {
     public static void main(String[] args) {
         MyPriorityQueue myPriorityQueue = new MyPriorityQueue();
-        myPriorityQueue.offer(1);
-        myPriorityQueue.offer(2);
-        myPriorityQueue.offer(3);
-        myPriorityQueue.offer(4);
-        myPriorityQueue.offer(5);
-        myPriorityQueue.offer(6);
-        myPriorityQueue.poll();
-        myPriorityQueue.display();
-        System.out.println(myPriorityQueue.peek());
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        queue.offer(6);
+        queue.offer(5);
+        queue.offer(4);
+        queue.offer(3);
+        queue.offer(2);
+        queue.offer(1);
+
+        System.out.println(queue);
     }
 }
