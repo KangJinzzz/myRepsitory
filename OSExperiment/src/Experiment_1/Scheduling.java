@@ -106,12 +106,14 @@ public class Scheduling {
     //时间片轮转
     public void timeRotation() {
         //时间片
-        int q = 4;
+        int q = 1;
         int t = 0;
         Collections.sort(list);
 
-        LinkedList<Process> queue = new LinkedList<>(list);
-
+        LinkedList<Process> queue = new LinkedList<>();
+        queue.offer(list.get(0));
+        list.get(0).isDealed = true;
+        t = list.get(0).TArrive;
         while (!queue.isEmpty()) {
             Process deal = queue.pollFirst();
             if(deal.TRemaining == q) {
@@ -128,10 +130,19 @@ public class Scheduling {
                 deal.TRemaining -= q;
                 t += q;
             }
+            for (Process process: list) {
+                if(!process.isDealed && process.TArrive <= t) {
+                    queue.offer(process);
+                    process.isDealed = true;
+                }
+            }
             if(deal.TRemaining > 0) {
                 queue.addLast(deal);
             }
         }
+
+
+
         for (Process process : list) {
             process.Ti = process.TComplete - process.TArrive;
             process.W = (double)process.Ti / process.TService;
