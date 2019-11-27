@@ -82,10 +82,11 @@ public class Scheduling {
 
     //短作业优先
     public void shortService() {
-        List<Process> deal = new ArrayList<>(list);
+        Collections.sort(list);
+        LinkedList<Process> deal = new LinkedList<>(list);
         int t = 0;
         while (!deal.isEmpty()) {
-            int TServiceMin = deal.get(0).TService;
+            int TServiceMin = deal.peekFirst().TService;
             Process toRemove = null;
 
             for (Process goal : deal) {
@@ -93,6 +94,11 @@ public class Scheduling {
                     TServiceMin = goal.TService;
                     toRemove = goal;
                 }
+            }
+            if (toRemove == null) {
+                toRemove = deal.peekFirst();
+                assert toRemove != null;
+                t = toRemove.TArrive;
             }
             Process process = find(TServiceMin);
             process.TComplete = t + TServiceMin;
@@ -107,39 +113,58 @@ public class Scheduling {
     public void timeRotation() {
         //时间片
         int q = 1;
-        int t = 0;
+        int time = 0;
         Collections.sort(list);
-
+        LinkedList<Process> nPerformed = new LinkedList<>(list);
         LinkedList<Process> queue = new LinkedList<>();
         queue.offer(list.get(0));
         list.get(0).isDealed = true;
-        t = list.get(0).TArrive;
-        while (!queue.isEmpty()) {
-            Process deal = queue.pollFirst();
-            if(deal.TRemaining == q) {
-                deal.TComplete = t + q;
-                deal.TRemaining = 0;
-                t += q;
+        time = list.get(0).TArrive;
 
-            } else if (deal.TRemaining < q) {
-                deal.TComplete = t + deal.TRemaining;
-                t += deal.TRemaining;
-                deal.TRemaining = 0;
-            } else {
-                deal.TComplete = t + q;
-                deal.TRemaining -= q;
-                t += q;
-            }
-            for (Process process: list) {
-                if(!process.isDealed && process.TArrive <= t) {
-                    queue.offer(process);
-                    process.isDealed = true;
+        while(!nPerformed.isEmpty()) {
+            while (!queue.isEmpty()) {
+                Process deal = queue.pollFirst();
+                if(!nPerformed.isEmpty() && nPerformed.peekFirst() == deal) {
+                    nPerformed.pollFirst();
+
+                }
+                assert deal != null;
+                if(deal.TRemaining == q) {
+                    deal.TComplete = time + q;
+                    deal.TRemaining = 0;
+                    time += q;
+
+                } else if (deal.TRemaining < q) {
+                    deal.TComplete = time + deal.TRemaining;
+                    time += deal.TRemaining;
+                    deal.TRemaining = 0;
+                } else {
+                    deal.TComplete = time + q;
+                    deal.TRemaining -= q;
+                    time += q;
+                }
+                for (Process process: list) {
+                    if(!process.isDealed && process.TArrive <= time) {
+                        queue.offer(process);
+                        process.isDealed = true;
+                    }
+                }
+                if(deal.TRemaining > 0) {
+                    queue.addLast(deal);
                 }
             }
-            if(deal.TRemaining > 0) {
-                queue.addLast(deal);
+            if(!nPerformed.isEmpty()) {
+                Process nDeal = nPerformed.peekFirst();
+                assert nDeal != null;
+
+                time = nDeal.TArrive;
+
+                queue.offer(nDeal);
             }
+
+
         }
+
 
 
 

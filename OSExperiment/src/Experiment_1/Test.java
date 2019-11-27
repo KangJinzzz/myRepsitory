@@ -9,8 +9,8 @@ public class Test {
         sc.add("D", 3, 2);
         sc.add("E", 4, 4);
 
-        //sc.shortService();
-        sc.timeRotation();
+        sc.shortService();
+        //sc.timeRotation();
         sc.display();
 
     }
