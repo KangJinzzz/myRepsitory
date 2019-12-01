@@ -49,7 +49,7 @@ public class Sort {
     public static void selectSort(int[] array) {
         // 先创建一个 bound 变量, 表示边界
         // [0, bound) 已排序区间
-        // [bound, size) 待排序区间
+        // [bound, array.length) 待排序区间
         for (int bound = 0; bound < array.length; bound++) {
             // 使用打擂台的方式找到待排序区间中的最小值
             // bound 位置的元素就是擂台
