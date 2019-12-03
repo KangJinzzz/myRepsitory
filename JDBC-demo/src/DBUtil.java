@@ -11,23 +11,25 @@ public class DBUtil {
 
     private static DataSource DATASOURCE = new MysqlDataSource();
     static {
-        ((MysqlDataSource)DATASOURCE).setUrl(URL);
+        ((MysqlDataSource)DATASOURCE).setURL(URL);
         ((MysqlDataSource)DATASOURCE).setUser(USERNAME);
         ((MysqlDataSource)DATASOURCE).setPassword(PASSWORD);
     }
 
 
+    private static DataSource DATASOURCE2;
+
+    public DBUtil() {
+
+    }
+
 
     public static Connection getConnection1() {
         Connection connection = null;
         try {
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-
-            } finally {
-                connection.close();
-            }
+            //加载JDBC驱动程序
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("数据库连接失败！");
@@ -46,6 +48,20 @@ public class DBUtil {
 
     }
 
+
+    /**
+     * 单例的方式
+     */
+    public static DataSource getDataSource() {
+        if(DATASOURCE2 == null) {
+            DATASOURCE2 = new MysqlDataSource();
+            ((MysqlDataSource)DATASOURCE2).setURL(URL);
+            ((MysqlDataSource)DATASOURCE2).setUser(USERNAME);
+            ((MysqlDataSource)DATASOURCE2).setPassword(PASSWORD);
+        }
+        return DATASOURCE2;
+    }
+
     public static void close(Connection connection, Statement statement, ResultSet resultSet) {
         try {
             if(connection != null) {
@@ -62,8 +78,9 @@ public class DBUtil {
         }
     }
 
-//    public static void main(String[] args) {
-//        Connection connection = getConnection1();
-//        System.out.println(connection);
-//    }
+    public static void main(String[] args) {
+        System.out.println(getConnection1());
+        System.out.println(getConnection2());
+        System.out.println(getDataSource());
+    }
 }

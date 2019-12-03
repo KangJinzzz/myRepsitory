@@ -6,14 +6,20 @@ import java.sql.Statement;
 
 public class Query {
     public static void main(String[] args) {
+        Insert();
+        Select();
+
+    }
+
+    public static void Select() {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DBUtil.getConnection2();
+            connection = DBUtil.getConnection1();
             statement = connection.createStatement();
-            String sql = "select id, name, chinese, math, english from exam_result;";
-            resultSet = statement.executeQuery(sql);
+            String sql1 = "select id, name, chinese, math, english from exam_result;";
+            resultSet = statement.executeQuery(sql1);
             while(resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
@@ -28,5 +34,22 @@ public class Query {
         } finally {
             DBUtil.close(connection, statement,resultSet);
         }
+    }
+
+    public static void Insert() {
+        String sql2 = "insert into exam_result(id, name, chinese, math, english) values (8, '徐凤年', 99, 97, 66);";
+
+        Connection connection = null;
+        Statement statement = null;
+        connection = DBUtil.getConnection2();
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(sql2);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(connection, statement,null);
+        }
+
     }
 }
