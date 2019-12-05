@@ -6,12 +6,10 @@ import java.sql.Statement;
 
 public class Query {
     public static void main(String[] args) {
-        Insert();
-        Select();
-
+        selectByid();
     }
 
-    public static void Select() {
+    public static void selectByid() {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -41,10 +39,15 @@ public class Query {
 
         Connection connection = null;
         Statement statement = null;
-        connection = DBUtil.getConnection2();
         try {
+            connection = DBUtil.getConnection2();
             statement = connection.createStatement();
-            statement.executeUpdate(sql2);
+            int num = statement.executeUpdate(sql2);
+            if(num > 0) {
+                 System.out.println("插入成功！");
+            } else {
+                 System.out.println("插入失败！");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
