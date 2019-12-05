@@ -15,8 +15,8 @@
       <file leaf-file-name="DListNode.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DListNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="160" selection-end-column="1" />
+            <state relative-caret-position="-601">
+              <caret line="49" column="24" lean-forward="true" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
               <folding>
                 <element signature="e#158#159#0" expanded="true" />
                 <element signature="e#188#189#0" expanded="true" />
@@ -28,8 +28,8 @@
       <file leaf-file-name="testDListNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/testDListNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="93" selection-end-column="1" />
+            <state relative-caret-position="360">
+              <caret line="12" column="41" lean-forward="true" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -68,9 +68,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -87,6 +84,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -177,11 +177,13 @@
       <workItem from="1571014957956" duration="56000" />
       <workItem from="1571016122585" duration="71000" />
       <workItem from="1571123836320" duration="77000" />
+      <workItem from="1575506383951" duration="7000" />
+      <workItem from="1575506963797" duration="631000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2329000" />
+    <option name="totallyTimeSpent" value="2967000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -201,7 +203,7 @@
       <window_info anchor="right" id="Word Book" order="3" side_tool="true" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17060086" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17489271" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -225,6 +227,42 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/DListNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+          <folding>
+            <element signature="e#158#159#0" expanded="true" />
+            <element signature="e#188#189#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testDListNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="7" column="20" selection-end-line="93" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DListNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="160" selection-end-column="1" />
+          <folding>
+            <element signature="e#158#159#0" expanded="true" />
+            <element signature="e#188#189#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testDListNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="93" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DListNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4740">
@@ -309,15 +347,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/testDListNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="93" selection-end-column="1" />
+        <state relative-caret-position="360">
+          <caret line="12" column="41" lean-forward="true" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DListNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="160" selection-end-column="1" />
+        <state relative-caret-position="-601">
+          <caret line="49" column="24" lean-forward="true" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
           <folding>
             <element signature="e#158#159#0" expanded="true" />
             <element signature="e#188#189#0" expanded="true" />
