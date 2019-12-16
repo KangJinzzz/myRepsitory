@@ -1,5 +1,7 @@
 package CurriculumDesign;
 
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,12 @@ class Process {
             max[i] = scanner.nextInt();
             need[i] = max[i];
         }
+    }
+
+    public Process(Process process) {
+        max = Arrays.copyOf(process.max, process.max.length);
+        allocation = Arrays.copyOf(process.allocation, process.allocation.length);
+        need = Arrays.copyOf(process.need, process.need.length);
     }
 
 
@@ -70,7 +78,9 @@ public class Banker {
     public void bankerAlgorithm() {
         //先拷贝一份list，newList
         List<Process> newList = new ArrayList<Process>();
-        for (Process)
+        for (Process process : list) {
+            newList.add(new Process(process));
+        }
 
         int[] arr = new int[3];
         Scanner scanner = new Scanner(System.in);
@@ -82,8 +92,9 @@ public class Banker {
         }
 
         //对newList进行试分配，成功进行安全算法，不成功直接返回
-
-
-
+        
     }
+
+
+
 }
