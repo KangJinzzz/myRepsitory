@@ -31,6 +31,7 @@ class Process {
         max = Arrays.copyOf(process.max, process.max.length);
         allocation = Arrays.copyOf(process.allocation, process.allocation.length);
         need = Arrays.copyOf(process.need, process.need.length);
+
     }
 
 
@@ -48,6 +49,7 @@ public class Banker {
     public List<Process> list = new ArrayList<Process>();
 
     public int[] Max = new int[3];
+    //可用资源数
     public int[] Available = new int[3];
 
     public Banker() {
@@ -82,16 +84,42 @@ public class Banker {
             newList.add(new Process(process));
         }
 
-        int[] arr = new int[3];
+        int[] request = new int[3];
         Scanner scanner = new Scanner(System.in);
         System.out.print("输入进行资源分配的Process：");
         int n = scanner.nextInt();
         for (int i = 0; i < 3; i++) {
             System.out.printf("source[%d]", i);
-            arr[i] = scanner.nextInt();
+            request[i] = scanner.nextInt();
         }
 
         //对newList进行试分配，成功进行安全算法，不成功直接返回
+        if (request[0] <= Available[0] && request[1] <= Available[1] && request[2] <= Available[2]) {
+            Available[0] -= request[0];
+            Available[1] -= request[1];
+            Available[2] -= request[2];
+            //更新尚需资源
+            newList.get(n).allocation[0] += request[0];
+            newList.get(n).allocation[1] += request[1];
+            newList.get(n).allocation[2] += request[2];
+            //更新已分配资源
+            newList.get(n).need[0] -= request[0];
+            newList.get(n).need[1] -= request[1];
+            newList.get(n).need[2] -= request[2];
+
+        } else {
+            System.out.println("分配失败！");
+            return;
+        }
+        boolean flag = safeCheck(newList);
+        if(flag) {
+            System.out.println("分配成功！");
+        } else {
+            System.out.println("没有通过安全性算法， 分配失败！");
+        }
+    }
+
+    public boolean safeCheck(List<Process> newList) {
         
     }
 
