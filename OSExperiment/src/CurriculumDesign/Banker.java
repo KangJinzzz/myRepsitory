@@ -43,7 +43,7 @@ public class Banker {
 
         @Override
         public String toString() {
-            return "Process{" +
+            return "{" +
                     "max=" + Arrays.toString(max) +
                     ", allocation=" + Arrays.toString(allocation) +
                     ", need=" + Arrays.toString(need) +
@@ -79,8 +79,8 @@ public class Banker {
 
     public void display() {
         System.out.println(Arrays.toString(Available));
-        for (Process process : list) {
-            System.out.println(process.toString());
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("process[" + i + "]" + list.get(i).toString());
         }
     }
 
@@ -102,9 +102,21 @@ public class Banker {
 
         //对newList进行试分配，成功进行安全算法，不成功直接返回
         boolean flag0 = true;
+        boolean flagAvailable = true;
+        boolean flagNeed = true;
+        //判断request <= need
+        for (int i = 0; i < request.length; i++) {
+            if (request[i] > newList.get(n).need[i]) {
+                flag0 = false;
+                flagNeed = false;
+                break;
+            }
+        }
+        //判断request <= need && request <= Available
         for (int i = 0; i < request.length; i++) {
             if (request[i] > Available[i]) {
                 flag0 = false;
+                flagAvailable = false;
                 break;
             }
         }
@@ -123,7 +135,11 @@ public class Banker {
             }
 
         } else {
-            System.out.println("分配失败！");
+            if (!flagNeed) {
+                System.out.println("request > need,请求非法");
+                return;
+            }
+            System.out.println("request > Available，分配失败！");
             return;
         }
         //进行安全检测
