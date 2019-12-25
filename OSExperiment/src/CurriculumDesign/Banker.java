@@ -172,6 +172,7 @@ public class Banker {
             }
         }
         boolean flag = true;
+        //newList中的finish全为true，才表示通过安全检测
         for (Process process : newList) {
             if(!process.finish) {
                 flag = false;
@@ -196,6 +197,7 @@ public class Banker {
             for (int i = 0; i < work.length; i++) {
                 if (process.need[i] > work[i]) {
                     flag = false;
+                    break;
                 }
             }
             if (flag && !process.finish) {
