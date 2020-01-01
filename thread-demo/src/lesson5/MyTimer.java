@@ -35,3 +35,24 @@ public class MyTimer {
                     }
                     // 当前时间比下次执行时间大，或相等，执行任务
                     task.run();
+                    if(period > 0)
+                        next += period;//间隔时间大于0，需要重复执行
+                    else
+                        break;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        MyTimer timer = new MyTimer();
+        timer.schedule(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("mytimer");
+            }
+        }, 0, 1000);
+    }
+}
