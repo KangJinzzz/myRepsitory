@@ -74,7 +74,7 @@ public class TCPServer {
                         e.printStackTrace();
                     }
                 }
-            }).start();
+            });
 
 
         }
