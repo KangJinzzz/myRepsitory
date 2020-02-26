@@ -14,6 +14,8 @@ public class HttpTask implements Runnable {
 
     private Response response;
 
+    private static final  String SESSION_KEY = "SESSIONID";
+
     //服务端保存session的数据结构（线程安全的map）；还可以保存在其他地方，如redis中间键
     private static ConcurrentMap<String, String> SESSIONS = new ConcurrentHashMap<>();
 
@@ -82,13 +84,34 @@ public class HttpTask implements Runnable {
                     //第一种：自己定义header头(需要客户端代码如：html，js代码中实现header解析和设置)
 //                    response.addHeader("SESSIONID",sessionId);
                     //第二种：设置到Cookie中,之后访问每个url都会在请求中包含Cookie=sessionId
-                    response.addHeader("Set-Cookie",sessionId);
+                    //返回一个heade头（Set-cookie:SESSION=xxxxx）
+                    //并且服务器保存了该信息xxxxx = 用户名，密码）
+                    response.addHeader("Set-Cookie",SESSION_KEY + "=" + sessionId);
                 }
             //敏感的url，没有登录不能访问
+            //浏览器出入的数据：header中为（Cookie: SESSIONID=xxxx）
             } else if ("/sensitive".equals(request.getUrl())) {
-                String sessionId = request.getHeader("SESSIONID");
-                String userInfo = SESSIONS.get(sessionId);
-                System.out.println("================获取到用户的信息："+ userInfo);
+                String content = "<p>该用户没有登录</p>";
+                String sessionInfo = request.getHeader("Cookie");//SESSIONID = sessionId(刚才生成的)
+                //解析Cookie内容（SESSIONID=xxxx；key2=value2;.....）
+                if (sessionInfo != null && sessionInfo.trim().length() != 0) {
+                    String[] cookieInfos = sessionInfo.split(";");
+                    if (cookieInfos != null) {
+                        for (String cookieInfo : cookieInfos) {
+                            String[] cookieArray = cookieInfo.trim().split(" ");
+                            if (SESSION_KEY.equals(cookieArray[0])) {
+                                String userInfo = SESSIONS.get(cookieArray[1]);
+                                if (userInfo != null) {
+                                    content = "获取到用户的信息" + userInfo;
+                                    System.out.println("================："+ userInfo);
+                                }
+
+                            }
+                        }
+                    }
+                }
+                response.build200();
+                response.println(content);
             } else { //以上所有路径都找不到，说明我们服务器不提供该url的服务，返回404
                 response.build404();
                 System.out.println("找不到资源");
