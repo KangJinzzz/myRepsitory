@@ -261,14 +261,15 @@ public class Sort {
 
     public static void main(String[] args) {
         int[] array = {2, 4, 1, 6, 7, 9, 0, 5, 3, 8};
+        int[] arr2 = {0, 1, 2, 3};
         //insertSort(array);
         //shellSort(array);
         //selectSort(array);
         //heapSort(array);
         //bubbleSort(array);
         //quickSort2(array);
-        mergeSort2(array);
-        System.out.println(Arrays.toString(array));
+        quickSort(arr2);
+        System.out.println(Arrays.toString(arr2));
     }
 }
 
