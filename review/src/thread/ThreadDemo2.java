@@ -1,13 +1,12 @@
 package thread;
 
 public class ThreadDemo2 {
-
         private static class MyRunnable implements Runnable {
             @Override
             public void run() {
-// 两种方法均可以
-                while (!Thread.currentThread().isInterrupted()) {
-//while (!Thread.currentThread().isInterrupted()) {
+                // 两种方法均可以
+                while (!Thread.interrupted()) {
+                //while (!Thread.currentThread().isInterrupted()) {
                     System.out.println(Thread.currentThread().getName()
                             + ": 别管我，我忙着转账呢!");
                     try {
@@ -33,5 +32,4 @@ public class ThreadDemo2 {
                     + ": 老板来电话了，得赶紧通知李四对方是个骗子！");
             thread.interrupt();
         }
-
 }
