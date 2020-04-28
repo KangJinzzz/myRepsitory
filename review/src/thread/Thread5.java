@@ -1,5 +1,7 @@
 package thread;
 
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+
 public class Thread5 {
     static class Counter {
 
