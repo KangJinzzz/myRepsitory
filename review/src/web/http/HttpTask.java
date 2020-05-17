@@ -13,6 +13,8 @@ public class HttpTask implements Runnable{
     //服务端保存session的数据结构：还可以保存在其他地方，如redis中间键
     private static ConcurrentMap<String, String> SESSIONS = new ConcurrentHashMap<>();
 
+    private static final String SESSION_KEY = "SESSIONID";
+
     public HttpTask(Socket socket) {
 //        this.socket = socket;
         try {
@@ -70,14 +72,32 @@ public class HttpTask implements Runnable{
                     String sessionId = UUID.randomUUID().toString();
                     SESSIONS.put(sessionId, request.getParameter("username")
                         + "," + request.getParameter("password"));
-//                    response.addHeader("SESSIONID", sessionId);
-                    response.addHeader("Set-Cookie", sessionId);
+
+                    response.addHeader("Set-Cookie", SESSION_KEY + "=" + sessionId);
                 }
-            } else if ("/sensitive".equals(request.getUrl())) {
-                //敏感的url，没登录的时候，不能访问
-                String sessionId = request.getHeader("Cookie");
-                String userInfo = SESSIONS.get(sessionId);
-                System.out.println("============获取到用户的信息：" + userInfo);
+            }
+            //敏感的url，没登录的时候，不能访问
+            //浏览器传入的数据：header中为（Cookie：SESSIONID=xxxx;k2=v2;k3=v3...）
+            else if ("/sensitive".equals(request.getUrl())) {
+                String content = "<p>该用户没有登录</p>";
+                String sessionInfo = request.getHeader("Cookie");
+                if (sessionInfo != null && sessionInfo.trim().length() != 0) {
+                    String[] cookieInfos = sessionInfo.split(";");
+                    if (cookieInfos != null) {
+                        for (String cookieInfo : cookieInfos) {
+                            String[] cookieArray = cookieInfo.trim().split("=");
+                            if (SESSION_KEY.equals(cookieArray[0])) {
+                                String userInfo = SESSIONS.get(cookieArray[1]);
+                                if (userInfo != null) {
+                                    content = "获取到用户的信息：" + userInfo;
+                                    System.out.println("============" + content);
+                                }
+                            }
+                        }
+                    }
+                }
+                response.build200();
+                response.println(content);
             } else {    //服务器不提供该url的服务
                 response.build404();
                 response.println("找不到资源");
