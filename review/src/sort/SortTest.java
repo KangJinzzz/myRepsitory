@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class SortTest {
     public static void main(String[] args) {
         int[] arr = new int[] {4, 6, 13, 1, 9, 6, 8, 21, 32, 17, -6, 0};
-        heapSort(arr);
+        mergeSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -103,8 +103,78 @@ public class SortTest {
     }
 
     //冒泡排序
-    
+    public static void bubbleSort(int[] arr) {
+        boolean flag = true;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    flag = false;
+                    swap(arr, j, j + 1);
+                }
+            }
+            if (flag) break;
+        }
+    }
 
+    //快速排序
+    public static void quickSort(int[] arr) {
+        partion(arr, 0, arr.length - 1);
+    }
+
+    private static void partion(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int i = left;
+        int j = right;
+        int pivot = arr[left];
+        while (i < j) {
+            while (i < j && arr[j] >= pivot) {
+                j--;
+            }
+            while (i < j && arr[i] <= pivot) {
+                i++;
+            }
+            swap(arr, i, j);
+        }
+        swap(arr, i, left);
+        partion(arr, left, i - 1);
+        partion(arr, i + 1, right);
+    }
+
+    //归并排序
+    public static void mergeSort(int[] arr) {
+        mergeSortHelper(arr, 0, arr.length - 1);
+    }
+
+    private static void mergeSortHelper(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int mid = (left + right) / 2;
+        mergeSortHelper(arr, left, mid);
+        mergeSortHelper(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+
+    private static void merge(int[] arr, int left, int mid, int right) {
+        int[] tmp = new int[right - left + 1];
+        int i = left;
+        int m = mid + 1;
+        int index = 0;
+        while (i <= mid && m <= right) {
+            if (arr[i] <= arr[m]) {
+                tmp[index++] = arr[i++];
+            } else {
+                tmp[index++] = arr[m++];
+            }
+        }
+        while (i <= mid) tmp[index++] = arr[i++];
+        while (m <= right) tmp[index++] = arr[m++];
+        for (int x : tmp) {
+            arr[left++] = x;
+        }
+    }
 
     public static void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
