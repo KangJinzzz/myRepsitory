@@ -6,7 +6,8 @@ import java.sql.Statement;
 
 public class Query {
     public static void main(String[] args) {
-        selectByid();
+//        selectByid();
+        Insert();
     }
 
     public static void selectByid() {

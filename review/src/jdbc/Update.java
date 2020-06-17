@@ -1,29 +1,29 @@
+package jdbc;
+
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class Delete {
+public class Update {
 
     public static void main(String[] args) {
-        delete(8);
+        update();
     }
 
-    public static void delete(int dropId) {
-        String sql = "delete from exam_result where id = ?";
+    public static void update() {
+        String sql = "update exam_result set math = 95 where id = 2";
 
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            connection = DBUtil.getConnection2();
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, dropId);
-
             int num = statement.executeUpdate();
             if(num > 0) {
-                System.out.println("删除成功！");
+                System.out.println("修改成功！");
             } else {
-                System.out.println("删除失败！");
+                System.out.println("修改失败！");
             }
         } catch (SQLException e) {
             e.printStackTrace();

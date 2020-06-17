@@ -1,12 +1,13 @@
+package jdbc;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Delete {
 
     public static void main(String[] args) {
-        delete(8);
+        delete(4);
     }
 
     public static void delete(int dropId) {
@@ -15,7 +16,7 @@ public class Delete {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            connection = DBUtil.getConnection2();
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(sql);
             statement.setInt(1, dropId);
 
