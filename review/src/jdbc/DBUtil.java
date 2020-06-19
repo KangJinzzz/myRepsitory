@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class DBUtil {
 
-//    private static String URL = "jdbc:mysql://172.17.216.245:3306/review?characterEncoding=utf8&useSSL=true" ;
+//    private static String URL = "jdbc:mysql://101.200.144.55:3306/review?useUnicode=true&characterEncoding=utf-8" ;
 
 //    private static String URL = "jdbc:mysql://127.0.0.1:3306/review?characterEncoding=utf8&useSSL=true";
     private static String URL = "jdbc:mysql://localhost:3306/review";
@@ -73,6 +73,6 @@ public class DBUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(getDataSource());
+        System.out.println(getConnection());
     }
 }
