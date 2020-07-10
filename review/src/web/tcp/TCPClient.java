@@ -18,6 +18,7 @@ public class TCPClient {
         BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
         OutputStream os = socket.getOutputStream();
+        // 使用PrintWriter更方便
         PrintWriter pw = new PrintWriter(os, true);
 
         while (true) {
