@@ -1,5 +1,8 @@
 package thread;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Wait {
     public static void main(String[] args) throws InterruptedException {
         Object object = new Object();
@@ -10,5 +13,6 @@ public class Wait {
         }
 
         System.out.println("main方法已结束");
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
     }
 }

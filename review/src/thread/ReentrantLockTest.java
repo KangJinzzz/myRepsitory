@@ -4,14 +4,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ReentrantLockTest {
-    private static int SUM;
+    private static int SUM = 0;
 
     public static void test() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             new Thread(()-> {
                 for (int j = 0; j < 10000; j++) {
                     synchronized (ReentrantLockTest.class) {
-                        SUM++;
+                        System.out.println(SUM++);
                     }
                 }
             }).start();
@@ -29,7 +29,7 @@ public class ReentrantLockTest {
                 for (int j = 0; j < 10000; j++) {
                     try {
                         lock.lock();
-                        SUM++;
+                        System.out.println(SUM++);
                     } finally {
                         lock.unlock();
                     }

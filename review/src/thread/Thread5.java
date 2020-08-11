@@ -35,3 +35,6 @@ public class Thread5 {
         System.out.println(counter.ret());
     }
 }
+
+
+

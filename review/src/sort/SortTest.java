@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class SortTest {
     public static void main(String[] args) {
         int[] arr = new int[] {4, 6, 13, 1, 9, 6, 8, 21, 32, 17, -6, 0};
-        mergeSort(arr);
+        mergeSort2(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -171,6 +171,43 @@ public class SortTest {
         }
         while (i <= mid) tmp[index++] = arr[i++];
         while (m <= right) tmp[index++] = arr[m++];
+        for (int x : tmp) {
+            arr[left++] = x;
+        }
+    }
+
+    public static void mergeSort2(int[] arr) {
+        mergeHelper(arr, 0, arr.length);
+    }
+
+    public static void mergeHelper(int[] arr, int left, int right) {
+        if (left >= right - 1) {
+            return;
+        }
+        int mid = (left + right) / 2;
+        mergeHelper(arr, left, mid);
+        mergeHelper(arr, mid, right);
+        merge2(arr, left, mid, right);
+    }
+
+    public static void merge2(int[] arr, int left, int mid, int right) {
+        int i = left;
+        int j = mid;
+        int[] tmp = new int[right - left];
+        int index = 0;
+        while (i < mid && j < right) {
+            if (arr[i] <= arr[j]) {
+                tmp[index++] = arr[i++];
+            } else {
+                tmp[index++] = arr[j++];
+            }
+        }
+        while (i < mid) {
+            tmp[index++] = arr[i++];
+        }
+        while (j < right) {
+            tmp[index++] = arr[j++];
+        }
         for (int x : tmp) {
             arr[left++] = x;
         }
