@@ -2,14 +2,16 @@ package sort;
 
 import java.util.Arrays;
 
+import static sort.Sort2.mergeSortHelper2;
+
 
 public class Sort2 {
     public static void main(String[] args) {
         int[] arr = new int[] {4, 6, 13, 1, 9, 6, 8, 21, 32, 17, -6, 0};
         int[] arr1 = new int[] {1,3,5, 2, 4 ,6};
-        merge(arr1, 0, 3, 6);
-        System.out.println(Arrays.toString(arr1));
-        mergeSort(arr);
+//        merge(arr1, 0, 3, 6);
+//        System.out.println(Arrays.toString(arr1));
+        mergeSort2(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -178,6 +180,48 @@ public class Sort2 {
         for(index = 0; index < tmp.length; index++) {
             arr[left++]  = tmp[index];
         }
+    }
+
+    public static void mergeSort2(int[] arr) {
+        if (arr.length == 0) {
+            return;
+        }
+        mergeSortHelper2(arr, 0, arr.length);
+
+    }
+
+    public static void mergeSortHelper2(int[] arr, int left, int right) {
+        if (left >= right - 1) {    //剩一个元素了，不用再分
+            return;
+        }
+        int mid = (left + right) / 2;
+        mergeSortHelper(arr, left, mid);
+        mergeSortHelper(arr, mid, right);
+        merge(arr, left, mid, right);
+    }
+
+    public static void merge2(int[] arr, int left, int mid, int right) {
+        int[] tmp = new int[right - left];
+        int index = 0;
+        int i = left;
+        int j = mid;
+        while (i < mid && j < right) {
+            if (arr[i] <= arr[j]) {
+                tmp[index++] = arr[i++];
+            } else {
+                tmp[index++] = arr[j++];
+            }
+        }
+        while (i < mid) {
+            tmp[index++] = arr[i++];
+        }
+        while (j < right) {
+            tmp[index++] = arr[j++];
+        }
+        for (index = 0; index < tmp.length; index++) {
+            arr[left + index] = tmp[index];
+        }
+
     }
 
 
