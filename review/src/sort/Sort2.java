@@ -11,7 +11,7 @@ public class Sort2 {
         int[] arr1 = new int[] {1,3,5, 2, 4 ,6};
 //        merge(arr1, 0, 3, 6);
 //        System.out.println(Arrays.toString(arr1));
-        mergeSort2(arr);
+        shellSort2(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -223,6 +223,31 @@ public class Sort2 {
         }
 
     }
+
+    public static void shellSort2(int[] arr) {
+        int gap = arr.length;
+        while (gap > 1) {
+            shellSortHelper2(arr, gap);
+            gap /= 2;
+        }
+        shellSortHelper2(arr, 1);
+    }
+
+    public static void shellSortHelper2(int[] arr, int gap) {
+        for (int i = 1; i < arr.length; i++) {
+            int tmp = arr[i];
+            int j = i - gap;
+            for (; j >= 0; j -= gap) {
+                if (arr[j] > tmp) {
+                    arr[j + gap] = arr[j];
+                } else {
+                    break;
+                }
+            }
+            arr[j + gap] = tmp;
+        }
+    }
+    
 
 
     public static void swap(int[] arr, int i, int j) {
