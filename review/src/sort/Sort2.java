@@ -11,7 +11,7 @@ public class Sort2 {
         int[] arr1 = new int[] {1,3,5, 2, 4 ,6};
 //        merge(arr1, 0, 3, 6);
 //        System.out.println(Arrays.toString(arr1));
-        shellSort2(arr);
+        heapSort2(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -247,7 +247,38 @@ public class Sort2 {
             arr[j + gap] = tmp;
         }
     }
-    
+
+    public static void heapSort2(int[] arr) {
+        createHeap2(arr);
+        for (int i = arr.length - 1; i > 0; i--) {
+            swap(arr, i, 0);
+            shiftDown2(arr, 0, i - 1);
+        }
+    }
+
+    public static void createHeap2(int[] arr) {
+        int parent = (arr.length - 2) / 2;
+        for (; parent >= 0; parent--) {
+            shiftDown2(arr, parent, arr.length - 1);
+        }
+    }
+
+    public static void shiftDown2(int[] arr, int index, int size) {
+        int parent = index;
+        int child = parent * 2 + 1;
+        while (child <= size) {
+            if (child + 1 <= size && arr[child + 1] > arr[child]) {
+                child += 1;
+            }
+            if (arr[parent] < arr[child]) {
+                swap(arr, parent, child);
+                parent = child;
+                child = 2 * parent + 1;
+            } else {
+                break;
+            }
+        }
+    }
 
 
     public static void swap(int[] arr, int i, int j) {
