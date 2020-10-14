@@ -11,7 +11,7 @@ public class Sort2 {
         int[] arr1 = new int[] {1,3,5, 2, 4 ,6};
 //        merge(arr1, 0, 3, 6);
 //        System.out.println(Arrays.toString(arr1));
-        heapSort2(arr);
+        quickSort2(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -278,6 +278,31 @@ public class Sort2 {
                 break;
             }
         }
+    }
+
+    public static void quickSort2(int[] arr)  {
+        partion2(arr, 0, arr.length - 1);
+    }
+
+    public static void partion2(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int pivot = arr[left];
+        int i = left;
+        int j = right;
+        while (i < j) {
+            while (i < j && arr[j] >= pivot) {
+                j--;
+            }
+            while (i < j && arr[i] <= pivot) {
+                i++;
+            }
+            swap(arr, i, j);
+        }
+        swap(arr, left, i);
+        partion2(arr, left, i - 1);
+        partion2(arr, i + 1, right);
     }
 
 
